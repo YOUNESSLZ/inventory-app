@@ -66,12 +66,12 @@ class EmployeeController extends Controller
      */
     public function show(string $id): Response
     {
-        $employee = User::where('role', 'employee')
-            ->findOrFail($id);
+        // $employee = User::where('role', 'employee')
+        //     ->findOrFail($id);
         
-        return Inertia::render('Admin/EmployeeDetails', [
-            'employee' => $employee
-        ]);
+        // return Inertia::render('Admin/EmployeeDetails', [
+        //     'employee' => $employee
+        // ]);
     }
 
     /**

@@ -16,8 +16,8 @@ export default function Login({ status, canResetPassword }) {
     };
 
     return (
-        <GuestLayout>
-            <Head title="Log in" />
+        <>
+       
 
             <div className="container d-flex align-items-center justify-content-center min-vh-100">
                 <div className="col-md-6 col-lg-5">
@@ -115,6 +115,6 @@ export default function Login({ status, canResetPassword }) {
                     </div>
                 </div>
             </div>
-        </GuestLayout>
+        </>
     );
 }

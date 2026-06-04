@@ -1,7 +1,17 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
+import { useState } from 'react';
 
 export default function ProduitsIndex({ produits }) {
+    const [searchTerm, setSearchTerm] = useState('');
+
+    // Filter products directly without useMemo
+    const filteredProduits = !searchTerm.trim()
+        ? produits
+        : produits.filter(produit =>
+            produit.nom.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
     return (
         <AuthenticatedLayout header="Produits">
             <Head title="Produits" />
@@ -9,12 +19,33 @@ export default function ProduitsIndex({ produits }) {
             <div className="container py-4">
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <h4 className="fw-bold text-dark">Liste des produits</h4>
-                           <Link href={route('admin.produits.create')} className="btn btn-primary">
+                    <Link href={route('admin.produits.create')} className="btn btn-primary">
                         <i className="bi bi-plus-circle me-2"></i> Ajouter un produit
                     </Link>
-                   
                 </div>
 
+                {/* 🔍 Search bar */}
+                <div className="input-group mb-4">
+                    <span className="input-group-text bg-white">🔍</span>
+                    <input
+                        type="text"
+                        className="form-control border-start-0 ps-0"
+                        placeholder="Rechercher par nom..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    {searchTerm && (
+                        <button
+                            className="btn btn-outline-secondary"
+                            onClick={() => setSearchTerm('')}
+                            type="button"
+                        >
+                            ✕
+                        </button>
+                    )}
+                </div>
+
+                {/* 📋 Products table */}
                 <div className="card shadow-sm border-0">
                     <div className="card-body">
                         <table className="table table-hover align-middle">
@@ -30,8 +61,8 @@ export default function ProduitsIndex({ produits }) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {produits.length > 0 ? (
-                                    produits.map((produit, index) => (
+                                {filteredProduits.length > 0 ? (
+                                    filteredProduits.map((produit, index) => (
                                         <tr key={produit.id}>
                                             <td>{index + 1}</td>
                                             <td>{produit.nom}</td>
@@ -41,24 +72,27 @@ export default function ProduitsIndex({ produits }) {
                                             <td>{produit.seuilAlert}</td>
                                             <td>
                                                 <div className="btn-group">
-                                                    <Link 
-                                                        href={route('admin.produits.show', produit.id)} 
-                                                        className="btn btn-sm btn-info"
+                                                    <Link
+                                                        href={route('admin.produits.show', produit.id)}
+                                                        className="btn btn-sm btn-info    rounded-1
+                                                        me-2"
+                                                     
                                                     >
                                                         <i className="bi bi-eye"></i>
                                                     </Link>
                                                     <Link
                                                         href={route('admin.produits.edit', produit.id)}
-                                                        className="btn btn-sm btn-warning"
+                                                        className="btn btn-sm btn-secondary    rounded-1
+                                                        me-2"
+                                                       
                                                     >
                                                         <i className="bi bi-pencil"></i>
                                                     </Link>
-                                                 
                                                     <Link
                                                         href={route('admin.produits.destroy', produit.id)}
                                                         method="delete"
                                                         as="button"
-                                                        className="btn btn-sm btn-danger"
+                                                        className="btn btn-sm btn-danger rounded-1"
                                                     >
                                                         <i className="bi bi-trash"></i>
                                                     </Link>

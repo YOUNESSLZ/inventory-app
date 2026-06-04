@@ -4,6 +4,11 @@ use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ProduitemployeController;
 use App\Http\Controllers\CategorieController;
 
+use App\Models\Product;
+use App\Models\Categorie;
+use App\Models\User;
+use App\Models\Raport;
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EmployeeController;  
 use Illuminate\Foundation\Application;
@@ -35,7 +40,11 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/dashboard', function () {
             $recentActivities = Activity::latest()->take(5)->get();
         return Inertia::render('Admin/Dashboard', [
-        'recentActivities' => $recentActivities
+        'recentActivities' => $recentActivities,
+        'produits' => Product::all(),
+        'categories' => Categorie::all(),
+        'Users' => User::all(),
+        'rapports' => Raport::all(),
     ]);})->name('admin.dashboard');
     
     // Employee management routes - Remove 'Admin/' namespace
@@ -102,9 +111,17 @@ Route::resource('/admin/produits', ProduitController::class)->names([
 // Employee routes
 Route::middleware(['auth', 'verified', 'checkuser', 'employee'])->group(function () {
     Route::get('/employee/dashboard', function () {
-        return Inertia::render('Employee/Dashboard');
+        return Inertia::render('Employee/Dashboard', [
+        'produits' => Product::all(),
+        'categories' => Categorie::all(),
+        'Users' => User::all(),
+        'rapports' => Raport::all(),]);
     })->name('employee.dashboard');
 
+
+
+
+      
 
 //     Route::put('produits/{id}/increase', [ProduitController::class, 'increase'])->name('produits.increase');
 // Route::put('produits/{id}/decrease', [ProduitController::class, 'decrease'])->name('produits.decrease');
@@ -118,6 +135,19 @@ Route::resource('employee/produits', ProduitemployeController::class)
         'update' => 'employee.produits.update',
         'destroy' => 'employee.produits.destroy',
     ]);
+
+    Route::resource('/employee/categories', CategorieController::class)->names([
+        'index' => 'employee.categories.index',
+        'create' => 'employee.categories.create',
+        'store' => 'employee.categories.store',
+        'edit' => 'employee.categories.edit',
+        'update' => 'employee.categories.update',
+        'destroy' => 'employee.categories.destroy',
+        
+    ]);
+ Route::get('employee/reports', [ReportController::class, 'index'])
+    ->name('reports.index');
+
 Route::put('employee/produits/{id}/increase', [ProduitemployeController::class, 'increase'])
     ->name('employee.produits.increase');
 

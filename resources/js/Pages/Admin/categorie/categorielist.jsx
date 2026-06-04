@@ -1,16 +1,17 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
-
+import { useState, useMemo } from 'react';
 export default function CategoriesIndex({ categories }) {
-    // Helper to format date + heure
-    // const formatDate = (dateString) => {
-    //     if (!dateString) return '';
-    //     const date = new Date(dateString);
-    //     return date.toLocaleDateString('fr-FR') + ' ' + date.toLocaleTimeString('fr-FR', {
-    //         hour: '2-digit',
-    //         minute: '2-digit',
-    //     });
-    // };
+ const [searchTerm, setSearchTerm] = useState('');
+    
+    // Filter categories based on search term
+    const filteredCategories = useMemo(() => {
+        if (!searchTerm.trim()) return categories;
+        return categories.filter(category => 
+            category.nom.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    }, [searchTerm, categories]);
+
 
     return (
         <AuthenticatedLayout header="Catégories">
@@ -23,7 +24,29 @@ export default function CategoriesIndex({ categories }) {
                         <i className="bi bi-plus-circle me-2"></i> Ajouter une catégorie
                     </Link>
                 </div>
-
+   <div className="mb-4">
+                    <div className="input-group">
+                        <span className="input-group-text bg-white">
+                            🔍
+                        </span>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Rechercher par nom..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        {searchTerm && (
+                            <button
+                                className="btn btn-outline-secondary"
+                                onClick={() => setSearchTerm('')}
+                                type="button"
+                            >
+                                ✕
+                            </button>
+                        )}
+                    </div>
+                </div>
                 <div className="card shadow-sm border-0">
                     <div className="card-body">
                         <table className="table table-hover align-middle">
@@ -39,8 +62,8 @@ export default function CategoriesIndex({ categories }) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {categories.length > 0 ? (
-                                    categories.map((categorie, index) => (
+                                {filteredCategories.length > 0 ? (
+                                    filteredCategories.map((categorie, index) => (
                                         <tr key={categorie.id}>
                                             <td>{index + 1}</td>
                                             <td>
@@ -65,7 +88,7 @@ export default function CategoriesIndex({ categories }) {
                                                 <div className="btn-group">
                                                     <Link
                                                         href={route('admin.categories.edit', categorie.id)}
-                                                        className="btn btn-sm btn-warning"
+                                                        className="btn btn-sm btn-secondary me-2 rounded-1 "
                                                     >
                                                         <i className="bi bi-pencil"></i>
                                                     </Link>
@@ -73,9 +96,9 @@ export default function CategoriesIndex({ categories }) {
                                                         href={route('admin.categories.destroy', categorie.id)}
                                                         method="delete"
                                                         as="button"
-                                                        className="btn btn-sm btn-danger"
+                                                        className="btn btn-sm btn-danger rounded-1 "
                                                     >
-                                                        <i className="bi bi-trash"></i>
+                                                        <i className="bi bi-trash "></i>
                                                     </Link>
                                                 </div>
                                             </td>

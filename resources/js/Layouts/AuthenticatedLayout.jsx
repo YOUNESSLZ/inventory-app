@@ -3,22 +3,19 @@ export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
 
     return (
-        <div className="min-vh-100 d-flex flex-column bg-light">
+        <>
             {/* Modern Navbar */}
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
                 <div className="container-fluid px-4">
                     <Link href="/" className="navbar-brand fw-bold fs-4">
-                    MyApp
+                    StockManager
                     </Link>       
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav me-auto">
                             <li className="nav-item">
-                             <Link 
-    href={route(user.role === 'admin' ? 'admin.dashboard' : 'employee.dashboard')} 
-    className="nav-link px-3"
->
-    Dashboard
-</Link>
+                             <Link href={route(user.role === 'admin' ? 'admin.dashboard' : 'employee.dashboard')} className="nav-link px-3">
+                             Dashboard
+                             </Link>
                             </li>
              
                         </ul>
@@ -51,20 +48,18 @@ export default function AuthenticatedLayout({ header, children }) {
                                 <i className="bi bi-person me-2"></i>
                                 Profile Settings</Link>
                                 </li>
-                                {user.role === "admin" && (<>
-                        <li>
+                                {user.role === "admin" && (<><li>
                                             <Link href={route('admin.employees.create')} className="dropdown-item py-2">
                                                 <i className="bi bi-person-plus me-2"></i>
                                                 Add Employee
                                             </Link>
                                         </li>
-                        <li>
-                           
-                      <Link  href={route('admin.employees.index')} className="dropdown-item py-2">
+                                        <li>
+                                            <Link  href={route('admin.employees.index')} className="dropdown-item py-2">
                                                 <i className="bi bi-people me-2"></i>
                                                 Manage Employees
                                             </Link>
-                      </li>
+                                            </li>
                       </>
                       
                       
@@ -91,15 +86,19 @@ export default function AuthenticatedLayout({ header, children }) {
 
             {/* Page Header - Only shown if header exists */}
             {header && (
-                <div className="bg-white border-bottom shadow-sm">
-                    <div className="container-fluid px-4 py-4">
-                        <h1 className="h2 mb-0 fw-bold text-dark">{header}</h1>
-                    </div>
-                </div>
-            )}
+                <div className="d-flex align-items-center gap-3 px-4 py-3 bg-white border-bottom shadow-sm ">
+                     <h2 className="fw-bold text-dark mb-0">{header}</h2>
+                      <div className="alert alert-primary py-1 px-2 small mb-0 shadow-sm">
+                         <i className="bi bi-person-check me-2"></i>
+                         Bienvenue, vous êtes connecté !
+                      </div>
+                </div>)}
+
 
             {/* Main Content - Properly styled card */}
             <main className="flex-grow-1">
+
+                
                 <div className="container-fluid px-4 py-4">
                     <div className="card shadow-sm border-0 rounded-3">
                         <div className="card-body p-4">
@@ -108,7 +107,7 @@ export default function AuthenticatedLayout({ header, children }) {
                     </div>
                 </div>
             </main>
-        <footer className="bg-dark text-white text-center py-3 mt-auto">
+        <footer className="bg-dark text-white text-center py-3 mt-auto fixed-bottom">
                     <small>© {new Date().getFullYear()} StockManager. Tous droits réservés.</small>
                 </footer>
             {/* Simple Footer */}
@@ -119,6 +118,6 @@ export default function AuthenticatedLayout({ header, children }) {
                     </div>
                 </div>
             </footer> */}
-        </div>
+        </>
     );
 }
