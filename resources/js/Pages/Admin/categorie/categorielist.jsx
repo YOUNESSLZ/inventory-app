@@ -17,7 +17,7 @@ export default function CategoriesIndex({ categories }) {
         <AuthenticatedLayout header="Catégories">
             <Head title="Catégories" />
 
-            <div className="container py-4">
+
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <h4 className="fw-bold text-dark">Liste des catégories</h4>
                     <Link href={route('admin.categories.create')} className="btn btn-primary">
@@ -47,7 +47,7 @@ export default function CategoriesIndex({ categories }) {
                         )}
                     </div>
                 </div>
-                <div className="card shadow-sm border-0">
+      
                     <div className="card-body">
                         <table className="table table-hover align-middle">
                             <thead className="table-light">
@@ -58,7 +58,7 @@ export default function CategoriesIndex({ categories }) {
                                     <th>Description</th>
                                     <th>Date de création</th>
                                     <th>Dernière mise à jour</th>
-                                    <th>Actions</th>
+                                    {/* <th>Actions</th> */}
                                 </tr>
                             </thead>
                             <tbody>
@@ -84,7 +84,7 @@ export default function CategoriesIndex({ categories }) {
                                             <td>{new Date(categorie.created_at).toLocaleString('fr-FR')}
                                             </td>
                                             <td>{new Date(categorie.created_at).toLocaleString('fr-FR')}</td>
-                                            <td>
+                                            {/* <td>
                                                 <div className="btn-group">
                                                     <Link
                                                         href={route('admin.categories.edit', categorie.id)}
@@ -101,7 +101,7 @@ export default function CategoriesIndex({ categories }) {
                                                         <i className="bi bi-trash "></i>
                                                     </Link>
                                                 </div>
-                                            </td>
+                                            </td> */}
                                         </tr>
                                     ))
                                 ) : (
@@ -114,8 +114,8 @@ export default function CategoriesIndex({ categories }) {
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
+          
+       
         </AuthenticatedLayout>
     );
 }

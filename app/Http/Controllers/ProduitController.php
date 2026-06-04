@@ -67,10 +67,16 @@ class ProduitController extends Controller
 
         return redirect()->route('admin.produits.index')->with('success', 'Produit ajouté avec succès.');
     }
+    public function clear(){
+        
+    Activity::truncate(); // deletes all rows quickly
+    return redirect()->route('admin.dashboard')
+        ->with('success', 'Toutes les activités ont été supprimées.');
+        
+}
 
-    /**
-     * Display the specified resource.
-     */
+
+
     public function show(string $id)
     {
         $produit = Product::with('categorie')->findOrFail($id);

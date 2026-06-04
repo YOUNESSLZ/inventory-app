@@ -93,6 +93,8 @@ Route::resource('/admin/produits', ProduitController::class)->names([
         'update' => 'admin.produits.update',
         'destroy' => 'admin.produits.destroy',
     ]);
+Route::delete('/admin/produits', [ProduitController::class, 'clear'])
+    ->name('admin.produits.clear');
 
     Route::resource('/admin/categories', CategorieController::class)->names([
         'index' => 'admin.categories.index',

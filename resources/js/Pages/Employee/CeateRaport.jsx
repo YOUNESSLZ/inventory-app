@@ -45,7 +45,7 @@ export default function Create() {
                                     <option value="">-- Sélectionner --</option>
                                     <option value="Ventes">Ventes</option>
                                     <option value="Stock">Stock</option>
-                                    <option value="RH">RH</option>
+                                    <option value="Other">other</option>
                                 </select>
                                 {errors.type && <div className="invalid-feedback">{errors.type}</div>}
                             </div>

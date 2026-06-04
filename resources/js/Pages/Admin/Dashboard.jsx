@@ -156,6 +156,14 @@ export default function Dashboard({ recentActivities, produits, categories, User
                                     <span className="badge bg-light text-dark rounded-pill">
                                         {recentActivities?.length || 0} activités
                                     </span>
+                                     <Link href={route('admin.produits.clear')} method="delete" as="button" className="btn btn-sm btn-outline-danger"
+                                     onClick={(e)=>{if(!window.confirm("Do you want to empty the Activities Table")){
+                                        e.preventDefault()}
+                                     }}
+                                     
+                                     >
+                <i className="bi bi-trash"></i> Vider
+            </Link>
                                 </div>
                             </div>
                             <div className="card-body p-0">
