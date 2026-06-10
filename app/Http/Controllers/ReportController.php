@@ -151,7 +151,14 @@ class ReportController extends Controller
         }
 
         Raport::where('id', $id)->delete();
-
+  Activity::create([
+            'action' => 'delete',
+            'description' => 'Delete raport: ' . $report->title,
+            'user_name' => Auth::user()->name,
+            'user_id' => Auth::id(),
+            'model_type' => 'raport',
+            'model_id' => $report->id
+        ]);
         return redirect()->route('reports.index')
             ->with('success', 'Rapport supprimé avec succès.');
     }

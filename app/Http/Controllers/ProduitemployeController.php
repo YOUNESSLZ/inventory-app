@@ -57,7 +57,7 @@ class ProduitemployeController extends Controller
    public function show(string $id)
     {
         $produit = Product::with('categorie')->findOrFail($id);
-        return Inertia::render('Admin/product/showproduits', [
+        return Inertia::render('Employee/product/showproduits', [
             'produit' => $produit,
         ]);
     }

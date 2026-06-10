@@ -111,6 +111,14 @@ public function store(Request $request)
         }
 
         $categorie->delete();
+         Activity::create([
+            'action' => 'Delete',
+            'description' => 'Delete categorie: ' . $categorie->nom,
+            'user_name' => Auth::user()->name,
+            'user_id' => Auth::id(),
+            'model_type' => 'categorie',
+            'model_id' => $categorie->id
+        ]);
 
         return redirect()->route('admin.categories.index')
             ->with('success', 'Catégorie supprimée avec succès.');

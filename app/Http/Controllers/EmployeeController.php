@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,7 +11,7 @@ use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
-
+use App\Models\Activity;
 class EmployeeController extends Controller
 {
     /**
@@ -56,37 +56,20 @@ class EmployeeController extends Controller
             'estValide' => false, // Needs admin approval
             'photo' => null,
         ]);
+               Activity::create([
+            'action' => 'created',
+            'description' => 'Added Employee: ' . $user->name,
+            'user_name' => Auth::user()->name,
+            'user_id' => Auth::id(),
+            'model_type' => 'User',
+            'model_id' => $user->id
+        ]);
 
         return redirect()->route('admin.employees.index')
             ->with('success', 'Employee created successfully.');
     }
 
-    /**
-     * Display the specified employee.
-     */
-    public function show(string $id): Response
-    {
-        // $employee = User::where('role', 'employee')
-        //     ->findOrFail($id);
-        
-        // return Inertia::render('Admin/EmployeeDetails', [
-        //     'employee' => $employee
-        // ]);
-    }
-
-    /**
-     * Show the form for editing the specified employee.
-     */
-    public function edit(string $id): Response
-    {
-        $employee = User::where('role', 'employee')
-            ->findOrFail($id);
-        
-        return Inertia::render('Admin/EditEmployee', [
-            'employee' => $employee
-        ]);
-    }
-
+ 
     /**
      * Update the specified employee in storage.
      */
@@ -123,6 +106,14 @@ class EmployeeController extends Controller
             ->findOrFail($id);
         
         $employee->delete();
+                 Activity::create([
+            'action' => 'delete',
+            'description' => 'Delete Employee: ' . $employee->name,
+            'user_name' => Auth::user()->name,
+            'user_id' => Auth::id(),
+            'model_type' => 'User',
+            'model_id' => $employee->id
+        ]);
 
         return redirect()->route('admin.employees.index')
             ->with('success', 'Employee deleted successfully.');

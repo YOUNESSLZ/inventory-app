@@ -1,0 +1,284 @@
+:root {
+    /* Primary Colors */
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --secondary: #3b82f6;
+
+    /* Neutral Colors */
+    --dark: #111827;
+    --gray: #6b7280;
+    --gray-light: #f3f4f6;
+    --gray-border: #e5e7eb;
+
+    /* Backgrounds */
+    --bg: #f8fafc;
+    --card-bg: #ffffff;
+}
+
+/* Navbar */
+
+.custom-navbar {
+    background: rgba(255,255,255,.85);
+    backdrop-filter: blur(15px);
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    border-bottom: 1px solid #eee;
+}
+
+.navbar-brand {
+    color: var(--dark);
+    font-size: 1.6rem;
+}
+
+.nav-link {
+    color: var(--gray);
+    font-weight: 500;
+}
+
+/* Hero */
+
+.hero-section {
+    min-height: 90vh;
+
+    display: flex;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff7ed,
+            #ffffff,
+            #ffedd5
+        );
+}
+
+.badge-custom {
+    background: rgba(37, 99, 235, .08);
+    color: var(--primary);
+
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+.hero-title {
+    margin-top: 20px;
+
+    font-size: 4rem;
+    font-weight: 800;
+
+    line-height: 1.1;
+
+    color: var(--dark);
+}
+
+.hero-description {
+    margin-top: 20px;
+
+    color: var(--gray);
+
+    font-size: 1.15rem;
+    max-width: 600px;
+}
+
+/* Buttons */
+
+.btn-primary-custom {
+    background: var(--primary);
+    color: white;
+    border: none;
+
+    padding: 14px 30px;
+    border-radius: 12px;
+
+    font-weight: 600;
+
+    transition: all .3s ease;
+}
+
+.btn-primary-custom:hover {
+    background: var(--primary-dark);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-outline-custom {
+    border: 1px solid var(--gray-border);
+    background: white;
+    color: var(--dark);
+
+    padding: 14px 30px;
+    border-radius: 12px;
+}
+
+/* Dashboard */
+
+.dashboard-preview {
+    background: white;
+
+    border: 1px solid var(--gray-border);
+
+    border-radius: 24px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 10px 40px rgba(15, 23, 42, .08);
+}
+
+.dashboard-header {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.dashboard-header span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ddd;
+}
+
+.dashboard-body {
+    display: grid;
+    gap: 15px;
+}
+
+.dashboard-stat {
+    background: var(--gray-light);
+
+    border-radius: 16px;
+
+    padding: 20px;
+}
+
+.dashboard-stat h2 {
+    color: var(--primary);
+}
+
+.dashboard-chart {
+    height: 150px;
+
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.bar {
+    flex: 1;
+
+    border-radius: 12px 12px 0 0;
+
+    background:
+        linear-gradient(
+            to top,
+            #2563eb,
+            #60a5fa
+        );
+}
+
+.h1 { height: 40%; }
+.h2 { height: 70%; }
+.h3 { height: 55%; }
+.h4 { height: 90%; }
+.h5 { height: 65%; }
+
+/* Features */
+
+.features-section {
+    padding: 100px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title h2 {
+    font-weight: 800;
+}
+
+.feature-card {
+    background: white;
+
+    border: 1px solid var(--gray-border);
+
+    border-radius: 20px;
+
+    padding: 35px;
+
+    box-shadow:
+        0 4px 20px rgba(15,23,42,.05);
+
+    transition: all .3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 15px 40px rgba(15,23,42,.10);
+}
+
+.icon-box {
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+
+    border-radius: 16px;
+
+    background: #eff6ff;
+
+    color: var(--primary);
+
+    margin-bottom: 20px;
+}
+
+/* Stats */
+
+.stats-section {
+    padding: 90px 0;
+    background: #f8fafc;
+}
+
+.stats-section h2 {
+    color: var(--primary);
+    font-size: 3rem;
+    font-weight: 800;
+}
+
+/* CTA */
+
+.cta-section {
+    padding: 100px 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1e3a8a,
+            #2563eb
+        );
+
+    color: white;
+}
+
+.cta-section h2 {
+    font-size: 3rem;
+    font-weight: 800;
+}
+
+/* Footer */
+
+.footer {
+    padding: 30px;
+    background: #111827;
+    color: white;
+}

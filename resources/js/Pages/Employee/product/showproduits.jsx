@@ -61,9 +61,7 @@ export default function ShowProduit({ produit }) {
                                     <Link href={route('produits.index')} className="btn btn-secondary">
                                         <i className="bi bi-arrow-left me-2"></i>  Liste des produits
                                     </Link>
-                                    <Link href={route('produits.edit', produit.id)} className="btn btn-warning">
-                                        <i className="bi bi-pencil-square me-2"></i> Modifier
-                                    </Link>
+                                
                                 </div>
                             </div>
                         </div>
